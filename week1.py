@@ -8,7 +8,7 @@ from pathlib import Path
 #
 # Objective:
 # 1. Load all monthly MLS Listing and Sold CSV files
-#    from January 2024 through the most recently completed month.
+#    from January 2024 through the most recently completed month 2026/8.
 # 2. Concatenate the monthly files into two combined datasets.
 # 3. Filter both datasets to PropertyType == "Residential".
 # 4. Save the Residential-filtered datasets as new CSV files.
@@ -38,7 +38,7 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 # CRMLSListing202401.csv
 # CRMLSListing202402.csv
 # ...
-# CRMLSListing202604.csv
+# CRMLSListing202608.csv
 
 listing_files = sorted(DATA_DIR.glob("CRMLSListing*.csv"))
 
@@ -46,7 +46,7 @@ listing_files = sorted(DATA_DIR.glob("CRMLSListing*.csv"))
 # CRMLSSold202401_filled.csv
 # CRMLSSold202402_filled.csv
 # ...
-# CRMLSSold202604.csv
+# CRMLSSold202608.csv
 
 sold_files = sorted(DATA_DIR.glob("CRMLSSold*.csv"))
 
@@ -65,21 +65,21 @@ print(f"Sold files found:    {len(sold_files)}")
 # ------------------------------------------------------------
 
 # We expect:
-# 28 monthly Listing files
-# 28 monthly Sold files
-# Total = 56 files
+# 32 monthly Listing files
+# 32 monthly Sold files
+# Total = 64 files
 
-if len(listing_files) != 28:
+if len(listing_files) != 32:
     raise ValueError(
-        f"Expected 28 Listing files, but found {len(listing_files)}."
+        f"Expected 32 Listing files, but found {len(listing_files)}."
     )
 
-if len(sold_files) != 28:
+if len(sold_files) != 32:
     raise ValueError(
-        f"Expected 28 Sold files, but found {len(sold_files)}."
+        f"Expected 32 Sold files, but found {len(sold_files)}."
     )
 
-print("File count check passed: 28 Listing + 28 Sold = 56 files.")
+print("File count check passed: 32 Listing + 32 Sold = 64 files.")
 
 
 # ------------------------------------------------------------
@@ -247,8 +247,8 @@ print("\n" + "=" * 70)
 print("SAVING OUTPUT FILES")
 print("=" * 70)
 
-listing_output = OUTPUT_DIR / "CRMLSListing_202401_202604_Residential.csv"
-sold_output = OUTPUT_DIR / "CRMLSSold_202401_202604_Residential.csv"
+listing_output = OUTPUT_DIR / "CRMLSListing_202401_202608_Residential.csv"
+sold_output = OUTPUT_DIR / "CRMLSSold_202401_202608_Residential.csv"
 
 listing_residential.to_csv(
     listing_output,
@@ -303,24 +303,25 @@ WEEK 1 SUMMARY
 ======================================================================
 
 LISTINGS
-Files loaded:              28
-Rows before concatenation: 860,898
-Rows after concatenation:  860,898
-Rows after Residential:    547,162
-Rows removed:              313,736
+Files loaded:              32
+Rows before concatenation: 990,110
+Rows after concatenation:  990,110
+Rows after Residential:    629,611
+Rows removed:              360,499
 
 SOLD
-Files loaded:              28
-Rows before concatenation: 615,707
-Rows after concatenation:  615,707
-Rows after Residential:    414,054
-Rows removed:              201,653
+Files loaded:              32
+Rows before concatenation: 714,375
+Rows after concatenation:  714,375
+Rows after Residential:    480,488
+Rows removed:              233,887
 
 Output files:
-  CRMLSListing_202401_202604_Residential.csv
-  CRMLSSold_202401_202604_Residential.csv
+  CRMLSListing_202401_202608_Residential.csv
+  CRMLSSold_202401_202608_Residential.csv
 
 Week 1 aggregation completed successfully!
 
 Process finished with exit code 0
+
 '''
